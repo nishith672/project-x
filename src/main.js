@@ -104,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     statusMsg.style.color = 'var(--accent-primary)';
                     form.reset();
                 } else {
-                    throw new Error(data.error || 'Failed to send message');
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to send message');
                 }
 
             } catch (error) {
