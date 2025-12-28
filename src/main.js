@@ -88,16 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // Simulate API call or use real endpoint
-                // const response = await fetch('/api/contact', ...);
+                // Call the Vercel serverless API
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
 
-                // For demo purposes, we'll simulate a success after delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                const data = await response.json();
 
-                // Success State
-                statusMsg.textContent = 'Message received. I will be in touch shortly.';
-                statusMsg.style.color = 'var(--accent-primary)';
-                form.reset();
+                if (response.ok && data.success) {
+                    // Success State
+                    statusMsg.textContent = 'Message received. I will be in touch shortly.';
+                    statusMsg.style.color = 'var(--accent-primary)';
+                    form.reset();
+                } else {
+                    throw new Error(data.error || 'Failed to send message');
+                }
 
             } catch (error) {
                 console.error('Error:', error);
