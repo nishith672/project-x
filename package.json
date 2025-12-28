@@ -7,7 +7,8 @@
         "client": "vite",
         "server": "nodemon server.js",
         "build": "vite build",
-        "start": "node server.js"
+        "start": "node server.js",
+        "deploy": "npm run build && cd dist && git init && git add -A && git commit -m 'Deploy' && git push -f https://github.com/nishith672/project-x.git main:gh-pages && cd .."
     },
     "dependencies": {
         "cors": "^2.8.5",
