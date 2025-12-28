@@ -88,18 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // Call the Vercel serverless API
-                const response = await fetch('/api/contact', {
+                // Call the Formspree API (Replace 'YOUR_FORM_ID' with your actual Formspree ID)
+                const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
                     method: 'POST',
                     headers: {
+                        'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
 
-                const data = await response.json();
-
-                if (response.ok && data.success) {
+                if (response.ok) {
                     // Success State
                     statusMsg.textContent = 'Message received. I will be in touch shortly.';
                     statusMsg.style.color = 'var(--accent-primary)';
